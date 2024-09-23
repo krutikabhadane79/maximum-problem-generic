@@ -55,32 +55,18 @@ public class TestMaximum<T> {
         System.out.println("Maximum string is " + max+" and its position is "+position);
     }
 
-    public static <T extends Comparable<T>> void getMax(TestMaximum testMaximum) {
-        Arrays.sort(testMaximum.typeArray);
-        T max = (T) testMaximum.typeArray[0];
-        int position = 0;
-        for (int i = 0; i < testMaximum.typeArray.length; i++)
-
-        {
-            T a = (T)testMaximum.typeArray[i];
-            int b = a.compareTo(max);
-            if(b > 0)
-            {
-                max = (T) testMaximum.typeArray[i];
-                position = i;
-            }
-        }
-        System.out.println("Maximum element is : "+max);
-        System.out.println("Maximum string is " + max+" and its position is "+position);
-        printArray(testMaximum.typeArray);
-
+    public static <T extends Comparable<T>> T getMax(T x, T y, T z) {
+        T max = x;
+        if (y.compareTo(max) > 0)
+            max = y;
+        if (z.compareTo(max) > 0)
+            max = z;
+        printMax(x, y, z, max);
+        return max;
     }
-
-    public static void printArray(Object[] typeArray) {
-        for (Object element : typeArray)
-        {
-            System.out.println(element+"  ");
-        }
+    public static <T> void printMax(T x, T y, T z, T max)
+    {
+        System.out.printf("Max of %s, %s and %s is %s\n", x, y, z, max);
     }
 
     public static void main( String[] args )
@@ -94,8 +80,11 @@ public class TestMaximum<T> {
         String[] stringArr = {"Krutika", "Janhvi", "Kavya"};
         getMaximumString(stringArr);
 
-        getMax(new TestMaximum(arr));
-        getMax(new TestMaximum(floatArr));
-        getMax(new TestMaximum(stringArr));
+        getMax(10,40,20);
+        System.out.println("Maximum integer is "+getMax(10,40,20));
+        getMax(2.3f,4.2f,7.5f);
+        System.out.println("Maximum float is "+getMax(2.3f,4.2f,7.5f));
+        getMax("Apple", "Peach", "Banana");
+        System.out.println("Maximum string is "+getMax("krutika", "kavya", "ruhi"));
     }
 }
